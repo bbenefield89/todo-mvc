@@ -1,28 +1,18 @@
-import { useEffect, useState } from "react"
-import Todo from "../models/Todo"
+import { useState } from "react"
+import { GenerateTodo, Todo } from "../models/Todo";
 
 const useTodoController = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [todoTitle, setTodoTitle] = useState("");
-  const [myString, setMyString] = useState("");
 
   const addTodo = () => {
-    const min = 100_000;
-    const max = 999_999;
-
-    const newTodo = new Todo(
-      Math.floor(Math.random() * (max - min + 1)) - min,
-      todoTitle,
-      false
-    );
-
+    const newTodo = GenerateTodo(todoTitle);
     setTodos([...todos, newTodo]);
-    setMyString("Hello");
   };
 
   const completeTodo = (id: number) => {
     const todosClone = structuredClone(todos);
-    const todoIndex =  todosClone.findIndex(t => t.id === id);
+    const todoIndex = todosClone.findIndex(t => t.id === id);
 
     if (todoIndex !== -1) {
       todosClone[todoIndex].isComplete = true;
@@ -32,7 +22,10 @@ const useTodoController = () => {
 
   const removeTodo = (id: number) => {
     const todosClone = structuredClone(todos);
-    const todoIndex = todosClone.findIndex(t => t.id === id);
+    const todoIndex = todosClone.findIndex((t: Todo) => {
+      console.log(t.id);
+      return t.id === id
+    });
 
     if (todoIndex !== -1) {
       todosClone.splice(todoIndex, 1);
@@ -41,7 +34,6 @@ const useTodoController = () => {
   };
 
   return {
-    myString,
     todos,
     todoTitle,
     addTodo,

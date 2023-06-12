@@ -1,20 +1,22 @@
-"use client";
-
 import useTodoController from "@/app/controllers/useTodoController";
-import { ChangeEvent, SyntheticEvent, useEffect } from "react";
+import { ChangeEvent, SyntheticEvent } from "react";
 
-const TodoForm = () => {
-  const { todoTitle, addTodo, setTodoTitle, } = useTodoController();
-  
+interface ITodoForm {
+  addTodo: () => void;
+}
+
+const TodoForm = (props: any) => {
+  // const { todoTitle, setTodoTitle, } = useTodoController();
+
   const handleTodoFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    addTodo();
+    props.addTodo();
   };
 
   const handleTodoInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTodoTitle(e.target.value);
+    props.setTodoTitle(e.target.value);
   };
-  
+
   return (
     <form onSubmit={handleTodoFormSubmit}>
       <label className="hidden" htmlFor="todo-input">Todo Title</label>
@@ -22,7 +24,7 @@ const TodoForm = () => {
         className="text-black"
         type="text"
         placeholder="Todo Title"
-        value={todoTitle}
+        value={props.todoTitle}
         onChange={handleTodoInputChange}
       />
       <button type="submit">Create Todo</button>

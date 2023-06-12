@@ -1,23 +1,24 @@
-"use client";
-
 import useTodoController from "@/app/controllers/useTodoController";
+import { Todo } from "@/app/models/Todo";
 import { MouseEvent } from "react";
 
-const TodoList = () => {
-  const { todos, removeTodo } = useTodoController();
-  
+interface ITodoList {
+  todos: Todo[]
+};
+
+const TodoList = (props: any) => {
   const handleDeleteTodoById = (e: MouseEvent<HTMLButtonElement>) => {
     const todoId = e.currentTarget.getAttribute("data-todo-id");
     const todoIdNumber = Number(todoId);
 
     if (todoId && !isNaN(todoIdNumber)) {
-      removeTodo(todoIdNumber);
+      props.removeTodo(todoIdNumber);
     }
   };
   
   return (
     <ul>
-      {todos.map((t) => {
+      {props.todos.map((t: any) => {
         return (
           <li key={t.id}>
             <span>{t.title}</span>
