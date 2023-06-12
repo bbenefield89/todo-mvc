@@ -1,13 +1,16 @@
-import { ChangeEvent, SyntheticEvent } from "react";
+import { TodoContext } from "@/app/controllers/TodoContextController";
+import { ChangeEvent, SyntheticEvent, useContext } from "react";
 
 const TodoForm = () => {
+  const { todoTitle, addTodo, setTodoTitle } = useContext(TodoContext);
+  
   const handleTodoFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    // create new todo
+    addTodo();
   };
 
   const handleTodoInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // set todo title
+    setTodoTitle(e.target.value);
   };
 
   return (
@@ -17,7 +20,7 @@ const TodoForm = () => {
         className="text-black"
         type="text"
         placeholder="Todo Title"
-        value={""}  // link value with todo title
+        value={todoTitle}
         onChange={handleTodoInputChange}
       />
       <button type="submit">Create Todo</button>
