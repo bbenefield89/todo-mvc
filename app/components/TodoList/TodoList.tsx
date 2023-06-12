@@ -1,24 +1,19 @@
-import useTodoController from "@/app/controllers/useTodoController";
-import { Todo } from "@/app/models/Todo";
 import { MouseEvent } from "react";
 
-interface ITodoList {
-  todos: Todo[]
-};
-
-const TodoList = (props: any) => {
+const TodoList = () => {
   const handleDeleteTodoById = (e: MouseEvent<HTMLButtonElement>) => {
     const todoId = e.currentTarget.getAttribute("data-todo-id");
     const todoIdNumber = Number(todoId);
 
     if (todoId && !isNaN(todoIdNumber)) {
-      props.removeTodo(todoIdNumber);
+      // remove todo
     }
   };
   
   return (
     <ul>
-      {props.todos.map((t: any) => {
+      {/* Render todos */}
+      {/* {todos.map((t: any) => {
         return (
           <li key={t.id}>
             <span>{t.title}</span>
@@ -26,7 +21,7 @@ const TodoList = (props: any) => {
             <button data-todo-id={t.id} onClick={handleDeleteTodoById}>X</button>
           </li>
         );
-      })}
+      })} */}
     </ul>
   )
 };

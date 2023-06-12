@@ -1,20 +1,13 @@
-import useTodoController from "@/app/controllers/useTodoController";
 import { ChangeEvent, SyntheticEvent } from "react";
 
-interface ITodoForm {
-  addTodo: () => void;
-}
-
-const TodoForm = (props: any) => {
-  // const { todoTitle, setTodoTitle, } = useTodoController();
-
+const TodoForm = () => {
   const handleTodoFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    props.addTodo();
+    // create new todo
   };
 
   const handleTodoInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    props.setTodoTitle(e.target.value);
+    // set todo title
   };
 
   return (
@@ -24,7 +17,7 @@ const TodoForm = (props: any) => {
         className="text-black"
         type="text"
         placeholder="Todo Title"
-        value={props.todoTitle}
+        value={""}  // link value with todo title
         onChange={handleTodoInputChange}
       />
       <button type="submit">Create Todo</button>
